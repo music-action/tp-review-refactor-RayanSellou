@@ -1,6 +1,6 @@
 pour chaque groupe participants:
 
-NOM prenom 
+SELLOU Rayan 
  - x
  - y
  - 7
