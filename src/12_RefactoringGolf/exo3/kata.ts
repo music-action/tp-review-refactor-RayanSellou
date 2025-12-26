@@ -1,7 +1,9 @@
+const EMPTY_SYMBOL = ' ';
+const PLAYER_O = 'O';
+const BOARD_SIZE = 3;
 
-const leBonNom = ' ';
 export class Game {
-private _lastSymbol = leBonNom;
+private _lastSymbol = EMPTY_SYMBOL;
 private _board: Board = new Board();
 
 public Play(symbol: string, x: number, y: number): void {
@@ -14,11 +16,9 @@ this.updateBoard(symbol, x, y);
 }
 
 private validateFirstMove(player: string) {
-if (this._lastSymbol == ' ') {
-  if (player == 'O') {
-    throw new Error('Invalid first player');
-  }
-}
+if (this._lastSymbol === EMPTY_SYMBOL && player === PLAYER_O) {
+      throw new Error('Invalid first player');
+    }
 }
 
 private validatePlayer(player: string) {
@@ -28,7 +28,7 @@ if (player == this._lastSymbol) {
 }
 
 private validatePositionIsEmpty(x: number, y: number) {
-if (this._board.TileAt(x, y).Symbol != ' ') {
+if (this._board.TileAt(x, y).Symbol != EMPTY_SYMBOL) {
   throw new Error('Invalid position');
 }
 }
@@ -54,14 +54,14 @@ if (this.isThirdRowFull() && this.isThirdRowFullWithSameSymbol()) {
   return this._board.TileAt(2, 0)!.Symbol;
 }
 
-return ' ';
+return EMPTY_SYMBOL;
 }
 
 private isFirstRowFull() {
 return (
-  this._board.TileAt(0, 0)!.Symbol != ' ' &&
-  this._board.TileAt(0, 1)!.Symbol != ' ' &&
-  this._board.TileAt(0, 2)!.Symbol != ' '
+  this._board.TileAt(0, 0)!.Symbol != EMPTY_SYMBOL &&
+  this._board.TileAt(0, 1)!.Symbol != EMPTY_SYMBOL &&
+  this._board.TileAt(0, 2)!.Symbol != EMPTY_SYMBOL
 );
 }
 
@@ -74,9 +74,9 @@ return (
 
 private isSecondRowFull() {
 return (
-  this._board.TileAt(1, 0)!.Symbol != ' ' &&
-  this._board.TileAt(1, 1)!.Symbol != ' ' &&
-  this._board.TileAt(1, 2)!.Symbol != ' '
+  this._board.TileAt(1, 0)!.Symbol != EMPTY_SYMBOL &&
+  this._board.TileAt(1, 1)!.Symbol != EMPTY_SYMBOL &&
+  this._board.TileAt(1, 2)!.Symbol != EMPTY_SYMBOL
 );
 }
 
@@ -89,9 +89,9 @@ return (
 
 private isThirdRowFull() {
 return (
-  this._board.TileAt(2, 0)!.Symbol != ' ' &&
-  this._board.TileAt(2, 1)!.Symbol != ' ' &&
-  this._board.TileAt(2, 2)!.Symbol != ' '
+  this._board.TileAt(2, 0)!.Symbol != EMPTY_SYMBOL &&
+  this._board.TileAt(2, 1)!.Symbol != EMPTY_SYMBOL &&
+  this._board.TileAt(2, 2)!.Symbol != EMPTY_SYMBOL
 );
 }
 
@@ -113,9 +113,9 @@ class Board {
 private _plays: Tile[] = [];
 
 constructor() {
-for (let i = 0; i < 3; i++) {
-  for (let j = 0; j < 3; j++) {
-    const tile: Tile = { X: i, Y: j, Symbol: ' ' };
+for (let i = 0; i < BOARD_SIZE; i++) {
+  for (let j = 0; j < BOARD_SIZE; j++) {
+    const tile: Tile = { X: i, Y: j, Symbol: EMPTY_SYMBOL };
     this._plays.push(tile);
   }
 }
